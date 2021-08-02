@@ -6,12 +6,15 @@ API_KEY = '9622319c139344ba9704bd198455cb64'
 
 #parse all the info from the URL and the response is converted into JSON format
 def home(request):
+    # get query string for this country. The value for country comes from the form in html
     country = request.GET.get('country')
+    # get query string for this category. The value for category comes from that form in html
     category = request.GET.get('category')
 
     if country:
+        # parse information based on country
         url = f'https://newsapi.org/v2/top-headlines?country={country}&apiKey={API_KEY}'
-        response = requests.get(url) #we get response from request
+        response = requests.get(url) # we get response from request
         data = response.json()
         # get into articles object iN JSON
         articles = data['articles']
@@ -19,7 +22,7 @@ def home(request):
         # parse information by category
         url = f'https://newsapi.org/v2/top-headlines?category={category}&apiKey={API_KEY}'
         response = requests.get(url) #we get response from request
-        data = response.json()
+        data = response.json() # convert response into json
         # get into articles object iN JSON
         articles = data['articles']
 
